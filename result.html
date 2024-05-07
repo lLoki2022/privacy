@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <style>
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="resultCanvas"></canvas> <!-- используем canvas для рисования текста на изображении -->
+    
+    <script>
+        // Получаем URL изображения и параметры текста и настроек
+        const urlParams = new URLSearchParams(window.location.search);
+        const imageUrl = urlParams.get('image_url');
+        const text = decodeURIComponent(urlParams.get('text'));
+        const x = parseInt(urlParams.get('x'));
+        const y = parseInt(urlParams.get('y'));
+        const fontColor = decodeURIComponent(urlParams.get('font_color'));
+        const fontSize = parseInt(urlParams.get('font_size'));
+        const fontName = decodeURIComponent(urlParams.get('font_name'));
+
+        // Отображаем изображение на canvas и рисуем на нем текст с заданными настройками
+        const canvas = document.getElementById('resultCanvas');
+        const ctx = canvas.getContext('2d');
+        const image = new Image();
+        image.onload = function() {
+            canvas.width = image.width;
+            canvas.height = image.height;
+            ctx.drawImage(image, 0, 0);
+            ctx.font = `${fontSize}px ${fontName}`;
+            ctx.fillStyle = fontColor;
+            ctx.fillText(text, x, y);
+        }
+        image.src = imageUrl;
+    </script>
+</body>
+</html>
