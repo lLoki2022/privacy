@@ -99,7 +99,8 @@
             const text = document.getElementById('text').value;
             const x = parseInt(document.getElementById('x').value);
             const y = parseInt(document.getElementById('y').value);
-            const fontColor = document.getElementById('font_color').value;
+           // const fontColor = document.getElementById('font_color').value;
+            const fontColor = encodeURIComponent(document.getElementById('font_color').value)
             const fontSize = parseInt(document.getElementById('font_size').value);
             const fontName = document.getElementById('font_name').value;
             const imageUrl = document.getElementById('image_url').value;
@@ -122,16 +123,17 @@
             const text = document.getElementById('text').value;
             const x = document.getElementById('x').value;
             const y = document.getElementById('y').value;
-            const fontColor = document.getElementById('font_color').value;
+           // const fontColor = document.getElementById('font_color').value;
+            const fontColor = encodeURIComponent(document.getElementById('font_color').value)
             const fontSize = document.getElementById('font_size').value;
             const fontName = document.getElementById('font_name').value;
             const imageUrl = document.getElementById('image_url').value;
         
             // Преобразуем значение fontColor в нужный формат без кодирования
-            const color = fontColor.replace('#', '%23');
+            //const color = fontColor.replace('#', '%23');
         
             // Формируем URL с параметрами
-            const url = `/result.html?text=${text}&x=${x}&y=${y}&font_color=${color}&font_size=${fontSize}&font_name=${fontName}&image_url=${imageUrl}`;
+            const url = `/result.html?text=${text}&x=${x}&y=${y}&font_color=${fontColor}&font_size=${fontSize}&font_name=${fontName}&image_url=${imageUrl}`;
         
             // Отображаем модальное окно с сгенерированной ссылкой
             document.getElementById('generatedLink').textContent =  "https://lloki2022.github.io/privacy" + url;
