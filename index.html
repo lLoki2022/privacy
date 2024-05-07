@@ -50,7 +50,7 @@
     </style>
 </head>
 <body>
-    <h1>Текстовый редактор изображений</h1>
+    <h1>Текст</h1>
     <form id="imageForm">
         <label for="text">Text:</label>
         <input type="text" name="text" id="text" value="Текст"><br>
@@ -75,14 +75,14 @@
             <!-- Добавьте другие варианты шрифтов по вашему выбору -->
         </select><br>
 
-        <label for="image_url">URL изображения:</label>
+        <label for="image_url">URL картинки:</label>
         <input type="url" name="image_url" id="image_url" value="https://img001.prntscr.com/file/img001/Dndak4wgSEyTTDngKhFovg.png"><br>
         
         <button type="button" onclick="generateLink()">Создать ссылку</button>
     </form>
 
     <div id="preview">
-        <h2>Картинка:</h2>
+        <h2>Редактор:</h2>
         <canvas id="previewCanvas"></canvas>
     </div>
 
