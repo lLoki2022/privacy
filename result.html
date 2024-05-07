@@ -13,9 +13,7 @@
 </head>
 <body>
     <h1>Result</h1>
-    <img id="resultImage" src="" alt="Result Image"> <!-- Добавленный тег img с id="resultImage" для превью изображения -->
-
-    <canvas id="resultCanvas" style="display: none;"></canvas> <!-- используем canvas для рисования текста на изображении -->
+    <canvas id="resultCanvas"></canvas> <!-- используем canvas для рисования текста на изображении -->
     
     <script>
         // Получаем URL изображения и параметры текста и настроек
@@ -27,9 +25,6 @@
         const fontColor = decodeURIComponent(urlParams.get('font_color'));
         const fontSize = parseInt(urlParams.get('font_size'));
         const fontName = decodeURIComponent(urlParams.get('font_name'));
-
-        // Отображаем изображение на странице в виде превью
-        document.getElementById('resultImage').src = imageUrl;
 
         // Отображаем изображение на canvas и рисуем на нем текст с заданными настройками
         const canvas = document.getElementById('resultCanvas');
