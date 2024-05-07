@@ -13,7 +13,8 @@
 </head>
 <body>
     <canvas id="resultCanvas"></canvas> <!-- используем canvas для рисования текста на изображении -->
-    
+    <img id="resultImage" src="" alt="Result Image"> <!-- добавляем тег <img> для отображения изображения -->
+
     <script>
         // Получаем URL изображения и параметры текста и настроек
         const urlParams = new URLSearchParams(window.location.search);
@@ -38,6 +39,9 @@
             ctx.fillText(text, x, y);
         }
         image.src = imageUrl;
+
+        // Устанавливаем атрибут src тега <img> на значение imageUrl
+        document.getElementById('resultImage').src = imageUrl;
     </script>
 </body>
 </html>
