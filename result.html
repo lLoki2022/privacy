@@ -12,7 +12,10 @@
     </style>
 </head>
 <body>
-    <canvas id="resultCanvas"></canvas> <!-- используем canvas для рисования текста на изображении -->
+    <h1>Result</h1>
+    <img id="resultImage" src="" alt="Result Image"> <!-- Добавленный тег img с id="resultImage" для превью изображения -->
+
+    <canvas id="resultCanvas" style="display: none;"></canvas> <!-- используем canvas для рисования текста на изображении -->
     
     <script>
         // Получаем URL изображения и параметры текста и настроек
@@ -24,6 +27,9 @@
         const fontColor = decodeURIComponent(urlParams.get('font_color'));
         const fontSize = parseInt(urlParams.get('font_size'));
         const fontName = decodeURIComponent(urlParams.get('font_name'));
+
+        // Отображаем изображение на странице в виде превью
+        document.getElementById('resultImage').src = imageUrl;
 
         // Отображаем изображение на canvas и рисуем на нем текст с заданными настройками
         const canvas = document.getElementById('resultCanvas');
@@ -38,7 +44,6 @@
             ctx.fillText(text, x, y);
         }
         image.src = imageUrl;
-        <img src="https://lloki2022.github.io/privacy/result.html?text=%D0%A2%D0%B5%D0%BA%D1%81%D1%82&x=50&y=50&font_color=%23de1717&font_size=200&font_name=Verdana&image_url=https%3A%2F%2Fimg001.prntscr.com%2Ffile%2Fimg001%2FDndak4wgSEyTTDngKhFovg.png" alt="Preview Image">
     </script>
 </body>
 </html>
