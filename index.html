@@ -86,6 +86,14 @@
         <canvas id="previewCanvas"></canvas>
     </div>
 
+    <!-- Модальное окно -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p id="generatedLink">Generated Link</p>
+        </div>
+    </div>
+
     <script>
         function generateImage() {
             const text = document.getElementById('text').value;
@@ -121,20 +129,14 @@
 
             const url = `/result.html?text=${text}&x=${x}&y=${y}&font_color=${fontColor}&font_size=${fontSize}&font_name=${fontName}&image_url=${imageUrl}`;
 
-            // Создаем ссылку
-            const link = document.createElement('a');
-            link.href = url;
-            link.textContent = "Click to open the generated image";
+            // Отображаем модальное окно с сгенерированной ссылкой
+            document.getElementById('generatedLink').textContent =  "https://lloki2022.github.io/privacy" + url;
+            document.getElementById('myModal').style.display = 'block';
+        }
 
-            // Проверяем, есть ли уже созданная ссылка на странице, и удаляем ее, если есть
-            const existingLink = document.getElementById('generatedLink');
-            if (existingLink) {
-                existingLink.parentNode.removeChild(existingLink);
-            }
-
-            // Добавляем созданную ссылку на страницу
-            link.id = 'generatedLink';
-            document.body.appendChild(link);
+        function closeModal() {
+            // Закрываем модальное окно
+            document.getElementById('myModal').style.display = 'none';
         }
 
         const formInputs = document.querySelectorAll('input, select');
