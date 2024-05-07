@@ -127,12 +127,17 @@
             const fontName = document.getElementById('font_name').value;
             const imageUrl = document.getElementById('image_url').value;
         
-            const url = `/result.html?text=${text}&x=${x}&y=${y}&font_color=${fontColor}&font_size=${fontSize}&font_name=${fontName}&image_url=${imageUrl}`;
+            // Преобразуем значение fontColor в нужный формат без кодирования
+            const color = fontColor.replace('#', '%23');
+        
+            // Формируем URL с параметрами
+            const url = `/result.html?text=${text}&x=${x}&y=${y}&font_color=${color}&font_size=${fontSize}&font_name=${fontName}&image_url=${imageUrl}`;
         
             // Отображаем модальное окно с сгенерированной ссылкой
             document.getElementById('generatedLink').textContent =  "https://lloki2022.github.io/privacy" + url;
             document.getElementById('myModal').style.display = 'block';
         }
+
 
 
         function closeModal() {
