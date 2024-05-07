@@ -12,9 +12,8 @@
     </style>
 </head>
 <body>
-    <!-- Изображение будет отображаться через тег <img src=...> -->
-    <img id="resultImage" src="" alt="Result Image">
-
+    <canvas id="resultCanvas"></canvas> <!-- используем canvas для рисования текста на изображении -->
+    
     <script>
         // Получаем URL изображения и параметры текста и настроек
         const urlParams = new URLSearchParams(window.location.search);
@@ -26,43 +25,18 @@
         const fontSize = parseInt(urlParams.get('font_size'));
         const fontName = decodeURIComponent(urlParams.get('font_name'));
 
-        // Создаем новый Image объект
+        // Отображаем изображение на canvas и рисуем на нем текст с заданными настройками
+        const canvas = document.getElementById('resultCanvas');
+        const ctx = canvas.getContext('2d');
         const image = new Image();
-
-        // Устанавливаем обработчик события onload для изображения
         image.onload = function() {
-            // Создаем холст
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-
-            // Устанавливаем размеры холста равные размерам изображения
             canvas.width = image.width;
             canvas.height = image.height;
-
-            // Рисуем изображение на холсте
             ctx.drawImage(image, 0, 0);
-
-            // Устанавливаем шрифт и цвет для текста
             ctx.font = `${fontSize}px ${fontName}`;
             ctx.fillStyle = fontColor;
-
-            // Рисуем текст на холсте
             ctx.fillText(text, x, y);
-
-            // Получаем данные холста в формате base64
-            const imageDataURL = canvas.toDataURL();
-
-            // Создаем новый Image объект для отображения результата
-            const resultImage = new Image();
-
-            // Устанавливаем данные base64 в качестве источника изображения для тега <img>
-            resultImage.src = imageDataURL;
-
-            // Вставляем изображение в документ
-            document.getElementById('resultImage').src = resultImage.src;
-        };
-
-        // Устанавливаем источник изображения для объекта Image
+        }
         image.src = imageUrl;
     </script>
 </body>
