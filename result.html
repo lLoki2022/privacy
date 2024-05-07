@@ -52,8 +52,14 @@
             // Получаем данные холста в формате base64
             const imageDataURL = canvas.toDataURL();
 
+            // Создаем новый Image объект для отображения результата
+            const resultImage = new Image();
+
             // Устанавливаем данные base64 в качестве источника изображения для тега <img>
-            document.getElementById('resultImage').src = imageDataURL;
+            resultImage.src = imageDataURL;
+
+            // Вставляем изображение в документ
+            document.getElementById('resultImage').src = resultImage.src;
         };
 
         // Устанавливаем источник изображения для объекта Image
