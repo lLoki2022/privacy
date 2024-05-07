@@ -119,20 +119,21 @@
         }
 
         function generateLink() {
-            const text = encodeURIComponent(document.getElementById('text').value);
-            const x = encodeURIComponent(document.getElementById('x').value);
-            const y = encodeURIComponent(document.getElementById('y').value);
-            const fontColor = encodeURIComponent(document.getElementById('font_color').value);
-            const fontSize = encodeURIComponent(document.getElementById('font_size').value);
-            const fontName = encodeURIComponent(document.getElementById('font_name').value);
-            const imageUrl = encodeURIComponent(document.getElementById('image_url').value);
-
+            const text = document.getElementById('text').value;
+            const x = document.getElementById('x').value;
+            const y = document.getElementById('y').value;
+            const fontColor = document.getElementById('font_color').value;
+            const fontSize = document.getElementById('font_size').value;
+            const fontName = document.getElementById('font_name').value;
+            const imageUrl = document.getElementById('image_url').value;
+        
             const url = `/result.html?text=${text}&x=${x}&y=${y}&font_color=${fontColor}&font_size=${fontSize}&font_name=${fontName}&image_url=${imageUrl}`;
-
+        
             // Отображаем модальное окно с сгенерированной ссылкой
             document.getElementById('generatedLink').textContent =  "https://lloki2022.github.io/privacy" + url;
             document.getElementById('myModal').style.display = 'block';
         }
+
 
         function closeModal() {
             // Закрываем модальное окно
