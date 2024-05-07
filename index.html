@@ -50,24 +50,24 @@
     </style>
 </head>
 <body>
-    <h1>Image Text Editor</h1>
+    <h1>Текстовый редактор изображений</h1>
     <form id="imageForm">
         <label for="text">Text:</label>
         <input type="text" name="text" id="text" value="Текст"><br>
 
-        <label for="x">X Position:</label>
+        <label for="x">X:</label>
         <input type="number" name="x" id="x" value="50"><br>
 
-        <label for="y">Y Position:</label>
+        <label for="y">Y:</label>
         <input type="number" name="y" id="y" value="50"><br>
 
-        <label for="font_color">Font Color:</label>
+        <label for="font_color">Цвет:</label>
         <input type="color" name="font_color" id="font_color" value="#000000"><br>
 
-        <label for="font_size">Font Size:</label>
+        <label for="font_size">Размер:</label>
         <input type="number" name="font_size" id="font_size" value="20"><br>
 
-        <label for="font_name">Font Name:</label>
+        <label for="font_name">Шрифта:</label>
         <select name="font_name" id="font_name">
             <option value="Arial">Arial</option>
             <option value="Times New Roman">Times New Roman</option>
@@ -75,14 +75,14 @@
             <!-- Добавьте другие варианты шрифтов по вашему выбору -->
         </select><br>
 
-        <label for="image_url">Image URL:</label>
+        <label for="image_url">URL изображения:</label>
         <input type="url" name="image_url" id="image_url" value="https://img001.prntscr.com/file/img001/Dndak4wgSEyTTDngKhFovg.png"><br>
         
-        <button type="button" onclick="generateLink()">Generate Link</button>
+        <button type="button" onclick="generateLink()">Создать ссылку</button>
     </form>
 
     <div id="preview">
-        <h2>Preview:</h2>
+        <h2>Картинка:</h2>
         <canvas id="previewCanvas"></canvas>
     </div>
 
@@ -90,7 +90,7 @@
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-            <p id="generatedLink">Generated Link</p>
+            <p id="generatedLink">Сгенерированная ссылка</p>
         </div>
     </div>
 
