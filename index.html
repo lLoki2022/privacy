@@ -81,13 +81,6 @@
         <button type="button" onclick="generateLink()">Generate Link</button>
     </form>
 
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <p id="modal-text">Сюда будет вставлен текст URL</p>
-        </div>
-    </div>
-
     <div id="preview">
         <h2>Preview:</h2>
         <canvas id="previewCanvas"></canvas>
@@ -117,29 +110,31 @@
             image.src = imageUrl;
         }
 
-		function generateLink() {
-			const text = document.getElementById('text').value;
-			const x = document.getElementById('x').value;
-			const y = document.getElementById('y').value;
-			const fontColor = document.getElementById('font_color').value;
-			const fontSize = document.getElementById('font_size').value;
-			const fontName = document.getElementById('font_name').value;
-			const imageUrl = document.getElementById('image_url').value;
+        function generateLink() {
+            const text = encodeURIComponent(document.getElementById('text').value);
+            const x = encodeURIComponent(document.getElementById('x').value);
+            const y = encodeURIComponent(document.getElementById('y').value);
+            const fontColor = encodeURIComponent(document.getElementById('font_color').value);
+            const fontSize = encodeURIComponent(document.getElementById('font_size').value);
+            const fontName = encodeURIComponent(document.getElementById('font_name').value);
+            const imageUrl = encodeURIComponent(document.getElementById('image_url').value);
 
-			const url = `/result?text=${text}&x=${x}&y=${y}&font_color=${fontColor}&font_size=${fontSize}&font_name=${fontName}&image_url=${imageUrl}`;
+            const url = `/result?text=${text}&x=${x}&y=${y}&font_color=${fontColor}&font_size=${fontSize}&font_name=${fontName}&image_url=${imageUrl}`;
 
-			// Показать модальное окно с URL
-			const modal = document.getElementById("myModal");
-			const modalText = document.getElementById("modal-text");
-			modalText.textContent = "https://lloki2022.github.io/privacy" + url;
-			modal.style.display = "block";
-		}
+            // Создаем ссылку
+            const link = document.createElement('a');
+            link.href = url;
+            link.textContent = "Click to open the generated image";
 
+            // Проверяем, есть ли уже созданная ссылка на странице, и удаляем ее, если есть
+            const existingLink = document.getElementById('generatedLink');
+            if (existingLink) {
+                existingLink.parentNode.removeChild(existingLink);
+            }
 
-
-        function closeModal() {
-            const modal = document.getElementById("myModal");
-            modal.style.display = "none";
+            // Добавляем созданную ссылку на страницу
+            link.id = 'generatedLink';
+            document.body.appendChild(link);
         }
 
         const formInputs = document.querySelectorAll('input, select');
