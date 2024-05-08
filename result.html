@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <!-- Метаданные для Twitter -->
-<meta property="og:image" content="https://lloki2022.github.io/privacy/banner.png">
+    <meta property="og:image" id="ogImage" content="">
 
-
-    
     <title>lLoki</title>
     <style>
         img {
@@ -30,6 +27,9 @@
         const fontColor = decodeURIComponent(urlParams.get('font_color'));
         const fontSize = parseInt(urlParams.get('font_size'));
         const fontName = decodeURIComponent(urlParams.get('font_name'));
+
+        // Set the content attribute of the og:image meta tag
+        document.getElementById('ogImage').setAttribute('content', imageUrl);
 
         // Отображаем изображение на canvas и рисуем на нем текст с заданными настройками
         const canvas = document.getElementById('resultCanvas');
