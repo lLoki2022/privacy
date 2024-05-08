@@ -28,7 +28,7 @@
         const fontSize = parseInt(urlParams.get('font_size'));
         const fontName = decodeURIComponent(urlParams.get('font_name'));
 
-        // Set the content attribute of the og:image meta tag with the imageUrl
+        // Set the content attribute of the og:image meta tag
         document.getElementById('ogImage').setAttribute('content', imageUrl);
 
         // Отображаем изображение на canvas и рисуем на нем текст с заданными настройками
