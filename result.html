@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,10 +27,14 @@
         const fontSize = parseInt(urlParams.get('font_size'));
         const fontName = decodeURIComponent(urlParams.get('font_name'));
 
+        // Устанавливаем ссылку на изображение в метатеге og:image
+        document.querySelector('meta[property="og:image"]').setAttribute('content', imageUrl);
+
         // Отображаем изображение на canvas и рисуем на нем текст с заданными настройками
         const canvas = document.getElementById('resultCanvas');
         const ctx = canvas.getContext('2d');
         const image = new Image();
+
         image.onload = function() {
             canvas.width = image.width;
             canvas.height = image.height;
@@ -39,10 +44,7 @@
             ctx.fillText(text, x, y);
         }
 
-       // Устанавливаем ссылку на изображение в метатеге og:image
-       document.querySelector('meta[property="og:image"]').setAttribute('content', imageUrl);
-
-       image.src = imageUrl;
+        image.src = imageUrl;
 
     </script>
 </body>
