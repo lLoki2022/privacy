@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Добавлен тег meta для Twitter -->
-    <meta property="twitter:image" content="${imageUrl}">
-    
     <title>lLoki</title>
     <style>
         img {
@@ -43,6 +40,11 @@
         }
         image.src = imageUrl;
 
+        // Создаем и добавляем тег meta для Twitter после определения imageUrl
+        const twitterMeta = document.createElement('meta');
+        twitterMeta.setAttribute('property', 'twitter:image');
+        twitterMeta.setAttribute('content', imageUrl);
+        document.head.appendChild(twitterMeta);
     </script>
 </body>
 </html>
