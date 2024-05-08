@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,14 +28,14 @@
         const fontSize = parseInt(urlParams.get('font_size'));
         const fontName = decodeURIComponent(urlParams.get('font_name'));
 
-        // Set the content attribute of the og:image meta tag
+        // Устанавливаем атрибут content тега meta для og:image с imageUrl
         document.getElementById('ogImage').setAttribute('content', imageUrl);
 
         // Отображаем изображение на canvas и рисуем на нем текст с заданными настройками
         const canvas = document.getElementById('resultCanvas');
         const ctx = canvas.getContext('2d');
         const image = new Image();
-        image.crossOrigin = "Anonymous"; // Ensuring proper image loading from external sources
+        image.crossOrigin = "Anonymous"; // Гарантируем правильную загрузку изображения из внешних источников
         image.onload = function() {
             canvas.width = image.width;
             canvas.height = image.height;
@@ -43,7 +43,7 @@
             ctx.font = `${fontSize}px ${fontName}`;
             ctx.fillStyle = fontColor;
             ctx.fillText(text, x, y);
-            // Update the og:image meta tag with the loaded image
+            // Обновляем атрибут content тега og:image с загруженным изображением
             document.getElementById('ogImage').setAttribute('content', canvas.toDataURL());
         }
         image.src = imageUrl;
