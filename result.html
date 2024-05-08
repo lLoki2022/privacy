@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Метаданные для Twitter -->
-    <meta property="og:image" id="ogImage" content="">
-
+    
+    <meta property="twitter:image" content="${imageUrl}">
+    
     <title>lLoki</title>
     <style>
         img {
@@ -17,7 +17,7 @@
 <body>
     <canvas id="resultCanvas"></canvas> <!-- используем canvas для рисования текста на изображении -->
     
-    <script defer>
+    <script>
         // Получаем URL изображения и параметры текста и настроек
         const urlParams = new URLSearchParams(window.location.search);
         const imageUrl = urlParams.get('image_url');
@@ -28,14 +28,10 @@
         const fontSize = parseInt(urlParams.get('font_size'));
         const fontName = decodeURIComponent(urlParams.get('font_name'));
 
-        // Устанавливаем атрибут content тега meta для og:image с imageUrl
-        document.getElementById('ogImage').setAttribute('content', imageUrl);
-
         // Отображаем изображение на canvas и рисуем на нем текст с заданными настройками
         const canvas = document.getElementById('resultCanvas');
         const ctx = canvas.getContext('2d');
         const image = new Image();
-        image.crossOrigin = "Anonymous"; // Гарантируем правильную загрузку изображения из внешних источников
         image.onload = function() {
             canvas.width = image.width;
             canvas.height = image.height;
@@ -43,8 +39,6 @@
             ctx.font = `${fontSize}px ${fontName}`;
             ctx.fillStyle = fontColor;
             ctx.fillText(text, x, y);
-            // Обновляем атрибут content тега og:image с загруженным изображением
-            document.getElementById('ogImage').setAttribute('content', canvas.toDataURL());
         }
         image.src = imageUrl;
 
