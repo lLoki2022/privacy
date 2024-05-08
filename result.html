@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta property="twitter:image" content="${imageUrl}">
+    
     <title>lLoki</title>
     <style>
         img {
@@ -10,8 +13,6 @@
             height: auto;
         }
     </style>
-    <!-- Добавляем метатег twitter:image внутри раздела head -->
-    <meta property="twitter:image" content="">
 </head>
 <body>
     <canvas id="resultCanvas"></canvas> <!-- используем canvas для рисования текста на изображении -->
@@ -38,11 +39,9 @@
             ctx.font = `${fontSize}px ${fontName}`;
             ctx.fillStyle = fontColor;
             ctx.fillText(text, x, y);
-
-            // После загрузки изображения устанавливаем значение twitter:image
-            document.querySelector('meta[property="twitter:image"]').setAttribute('content', imageUrl);
         }
         image.src = imageUrl;
+
     </script>
 </body>
 </html>
