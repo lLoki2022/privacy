@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <meta property="twitter:image" content="https://github.githubassets.com/assets/campaign-social-031d6161fa10.png">
-    
+    <meta property="og:image" content="">
     <title>lLoki</title>
     <style>
         img {
@@ -40,7 +38,11 @@
             ctx.fillStyle = fontColor;
             ctx.fillText(text, x, y);
         }
-        // image.src = imageUrl;
+
+       // Устанавливаем ссылку на изображение в метатеге og:image
+       document.querySelector('meta[property="og:image"]').setAttribute('content', imageUrl);
+
+       image.src = imageUrl;
 
     </script>
 </body>
