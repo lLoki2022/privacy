@@ -1,21 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MC Server Status</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON Data Display</title>
+  <style>
+    pre {
+      background-color: #f4f4f4;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+  </style>
 </head>
 <body>
-    <div id="mcStatus"></div>
+  <h1>JSON Data</h1>
+  <div id="json-data">
+    <!-- JSON data will be displayed here -->
+  </div>
 
-    <script>
-        $(document).ready(function() {
-            $.getJSON('https://api.mcstatus.io/v2/status/java/s32.mcskill.net:25530', function(data) {
-                var html = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
-                $('#mcStatus').html(html);
-            });
-        });
-    </script>
+  <script>
+    // Function to fetch and display JSON data
+    async function fetchAndDisplayData() {
+      try {
+        const response = await fetch('https://lloki2022.github.io/privacy/');
+        const jsonData = await response.json();
+
+        // Convert JSON object to formatted string for display
+        const formattedJson = JSON.stringify(jsonData, null, 2);
+
+        // Display JSON data in <pre> element
+        document.getElementById('json-data').innerHTML = `<pre>${formattedJson}</pre>`;
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        document.getElementById('json-data').innerHTML = '<p>Error fetching data</p>';
+      }
+    }
+
+    // Call fetchAndDisplayData function when the page loads
+    window.onload = fetchAndDisplayData;
+  </script>
 </body>
 </html>
