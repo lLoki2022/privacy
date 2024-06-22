@@ -1,162 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Text Editor</title>
-    <style>
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        /* Стили для модального окна */
-        .modal {
-            display: none; /* по умолчанию скрыто */
-            position: fixed; /* фиксированное положение */
-            z-index: 1; /* поверх всего */
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto; /* прокрутка, если контент больше окна */
-            background-color: rgba(0, 0, 0, 0.4); /* полупрозрачный темный фон */
-        }
-
-        /* Стили для содержимого модального окна */
-        .modal-content {
-            background-color: #fefefe; /* белый фон */
-            margin: 15% auto; /* 15% от верха, центрирование по горизонтали */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%; /* ширина содержимого */
-        }
-
-        /* Закрыть кнопка */
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCStatus</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 1em;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+  </style>
 </head>
 <body>
-    <h1>Текст</h1>
-    <form id="imageForm">
-        <label for="Текст">Text:</label>
-        <input type="text" name="text" id="text" value="Текст"><br>
-
-        <label for="x">X:</label>
-        <input type="number" name="x" id="x" value="50"><br>
-
-        <label for="y">Y:</label>
-        <input type="number" name="y" id="y" value="50"><br>
-
-        <label for="font_color">Цвет:</label>
-        <input type="color" name="font_color" id="font_color" value="#000000"><br>
-
-        <label for="font_size">Размер:</label>
-        <input type="number" name="font_size" id="font_size" value="20"><br>
-
-        <label for="font_name">Шрифта:</label>
-        <select name="font_name" id="font_name">
-            <option value="Arial Narrow">Arial Narrow</option>
-            <option value="Century Gothic">Century Gothic</option>
-            <option value="Book Antiqua">Book Antiqua</option>
-            <option value="Franklin Gothic Medium">Franklin Gothic Medium</option>
-            <option value="Garamond">Garamond</option>
-            <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
-            <option value="Segoe UI">Segoe UI</option>
-            <option value="MS Sans Serif">MS Sans Serif</option>
-            <option value="Rockwell">Rockwell</option>
-            <option value="SimSun">SimSun</option>
-            <option value="Yu Gothic">Yu Gothic</option>
-            <option value="Mongolian Baiti">Mongolian Baiti</option>
-
-        </select><br>
-
-        <label for="image_url">URL картинки:</label>
-        <input type="url" name="image_url" id="image_url" value="https://img001.prntscr.com/file/img001/Dndak4wgSEyTTDngKhFovg.png"><br>
-        
-        <button type="button" onclick="generateLink()">Создать ссылку</button>
-    </form>
-
-    <div id="preview">
-        <h2>Редактор:</h2>
-        <canvas id="previewCanvas"></canvas>
-    </div>
-
-    <!-- Модальное окно -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <p id="generatedLink">Сгенерированная ссылка</p>
-        </div>
-    </div>
-
-    <script>
-        function generateImage() {
-            const text = document.getElementById('text').value;
-            const x = parseInt(document.getElementById('x').value);
-            const y = parseInt(document.getElementById('y').value);
-            const fontColor = document.getElementById('font_color').value;
-            const fontSize = parseInt(document.getElementById('font_size').value);
-            const fontName = document.getElementById('font_name').value;
-            const imageUrl = document.getElementById('image_url').value;
-
-            const canvas = document.getElementById('previewCanvas');
-            const ctx = canvas.getContext('2d');
-            const image = new Image();
-            image.onload = function() {
-                canvas.width = image.width;
-                canvas.height = image.height;
-                ctx.drawImage(image, 0, 0);
-                ctx.font = `${fontSize}px ${fontName}`;
-                ctx.fillStyle = fontColor;
-                ctx.fillText(text, x, y);
-            }
-            image.src = imageUrl;
+  <h1>MCStatus</h1>
+  <div id="content">
+    <p>Loading...</p>
+  </div>
+  <script>
+    async function fetchMCStatus() {
+      try {
+        const response = await fetch('https://api.mcstatus.io/v2/status/java/s32.mcskill.net:25530');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
         }
-
-        function generateLink() {
-            const text = document.getElementById('text').value;
-            const x = document.getElementById('x').value;
-            const y = document.getElementById('y').value;
-            const fontColor = encodeURIComponent(document.getElementById('font_color').value)
-            const fontSize = document.getElementById('font_size').value;
-            const fontName = encodeURIComponent(document.getElementById('font_name').value)
-            const imageUrl = document.getElementById('image_url').value;
-        
-            // Формируем URL с параметрами
-            const url = `/result.html?text=${text}&x=${x}&y=${y}&font_color=${fontColor}&font_size=${fontSize}&font_name=${fontName}&image_url=${imageUrl}`;
-        
-            // Отображаем модальное окно с сгенерированной ссылкой
-            document.getElementById('generatedLink').textContent =  "https://lloki2022.github.io/privacy" + url;
-            document.getElementById('myModal').style.display = 'block';
-        }
-
-
-
-        function closeModal() {
-            // Закрываем модальное окно
-            document.getElementById('myModal').style.display = 'none';
-        }
-
-        const formInputs = document.querySelectorAll('input, select');
-        formInputs.forEach(input => {
-            input.addEventListener('input', generateImage);
-        });
-
-        generateImage(); // Вызываем функцию один раз при загрузке страницы
-    </script>
+        const data = await response.json();
+        document.getElementById('content').innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+      } catch (error) {
+        document.getElementById('content').innerHTML = '<p>Error fetching data: ' + error.message + '</p>';
+      }
+    }
+    fetchMCStatus();
+  </script>
 </body>
 </html>
